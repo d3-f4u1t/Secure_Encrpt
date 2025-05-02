@@ -17,3 +17,9 @@ A simple encryption application that combines XOR encryption for message encodin
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/secure_encryptor.git
+
+## Run this command to install dependencies:
+1. Run this:
+   ```bash
+   pip install -r requirements.txt
+
