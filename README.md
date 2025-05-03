@@ -13,6 +13,10 @@ A simple encryption application that combines XOR encryption for message encodin
 3. The encrypted message and key will be displayed.
 4. To decrypt, input the encrypted message and key, and the application will decrypt it.
 
+##Working on-->
+1.RSA implementation
+2.SQL database implementation
+
 ## Home Screen:
 ![Home](assets/mainSS.png)
 
