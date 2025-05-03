@@ -1,4 +1,6 @@
 import customtkinter as ctk
+import webbrowser
+
 #just for the ss 
 #main start is at main.py
 class SplashScreen:
@@ -141,6 +143,19 @@ class SplashScreen:
 
         self.root.after(200, self.place_top_right_buttons)
 
+        self.discord_button = ctk.CTkButton(
+            self.sidebar,
+            text ="Add me on Discord:)",
+            font = ctk.CTkFont(size = 16),
+            width = 150,
+            height = 35,
+            corner_radius = 12,
+            command= self.open_discord
+        
+        )
+        self.discord_button.pack(pady=10)
+
+
 
 
 
@@ -180,6 +195,14 @@ class SplashScreen:
             spacing = 10
             self.close_button.place(x=width - 45, y=10)
             self.minimize_button.place(x=width - 90, y=10)
+
+    def open_discord(self):
+        webbrowser.open_new("http://discordapp.com/users/873571615852617760") 
+
+
+    #stuff inside the sidebar
+
+    
 
 
         
