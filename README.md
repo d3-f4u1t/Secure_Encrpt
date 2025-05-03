@@ -13,6 +13,13 @@ A simple encryption application that combines XOR encryption for message encodin
 3. The encrypted message and key will be displayed.
 4. To decrypt, input the encrypted message and key, and the application will decrypt it.
 
+## Home Screen:
+![Home](assets/mainSS.png)
+
+## Encryption Example:
+![Encrypt](assets/subsec1.png)
+![Decrypt](assets/subsec2.png)
+
 ## Installation:
 1. Clone the repository:
    ```bash
