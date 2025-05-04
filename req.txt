@@ -2,6 +2,7 @@ req:
 app will use Xor for symmetric encryption 
 then use rsa for key exchange
 basic gui from tkinter
+
 well
 
 
@@ -14,10 +15,10 @@ then that  Xor KEY IS ENCPT USING RSA PUBLIC KEY AND that key will come from the
 FOR NOW LETS CALL THE SENDER A
 AND THE ONE GETING THE MEASG B
 
-both will be saved
+both key will be saved
 -----
 then B CAN:
-dcrpt that key using rsa private key and they themself have
+dcrpt that key using rsa private key that they themself have
 and then dcrpt the measg using that Xor key
 
 
@@ -25,6 +26,8 @@ APP str
 
 secure_encryptor/
 ├── main.py            #main GUI and logic
+├── encryption_app     #GUI for main app
+├── splash_screen      #for ss window
 ├── encryption.py      #handles RSA + XOR encrpt/dcrpt
 ├── rsa_keys/          #folder to store generated RSA keys
 │   ├── private.pem

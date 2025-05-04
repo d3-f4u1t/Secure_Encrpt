@@ -1,5 +1,9 @@
 import customtkinter as ctk
 from encryption import xor_encrypt, xor_decrypt, generate_random_key, binary_to_text
+from tkinter import messagebox, filedialog
+from encryption import import_rsa_public_key #same as there
+
+
 
 
 class EncryptionApp:
@@ -44,6 +48,14 @@ class EncryptionApp:
         )
         self.decrypt_button.pack(pady = 10)
 
+        self.import_key_button = ctk.CTkButton(
+            self.frame,
+            text = "Import Public Key",
+            command= self.select_public_key_file,
+
+        )
+        self.import_key_button.pack(pady=10)
+
         #output box
         self.output_box = ctk.CTkTextbox(self.frame, width = 600, height = 200)
         self.output_box.pack(pady=10)
@@ -69,6 +81,17 @@ class EncryptionApp:
         self.output_box.delete("0.0", "end")
         self.output_box.insert("0.0", f"Decrypted:\n{decrypted}")
 
+    def select_public_key_file(self):
+        file_path = filedialog.askopenfilename(
+            title = "select public key file",
+            filetypes= [("PEM files", "*.pem")]
+        )
+        if file_path:
+            try:
+                import_rsa_public_key(file_path)
+                messagebox.showinfo("Success", "Public key imported successfully.")
+            except Exception as e:
+                messagebox.showerror("Error", f"Failed to import public key:\n {e}")
 
 
 

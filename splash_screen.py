@@ -163,6 +163,8 @@ class SplashScreen:
         #main content frame
 
         
+
+        
     def toggle_sidebar(self):
         if not self.sidebar_open:
              #to remove the sliderbar from the screen

@@ -1,6 +1,13 @@
 #this is for encrption/decryption logic
 import random
 import base64
+import os
+import shutil
+from cryptography.hazmat.primitives import serialization #for importing keys and basic moving
+from cryptography.hazmat.backends import default_backend
+
+
+
 print("its working here")
 
 def text_to_binary(text):
@@ -24,6 +31,7 @@ def base64_to_binary(b64_str):
 def generate_random_key(length=16):
     return ''.join(random.choice('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') for _ in range(length))
 
+
 #test
 
 
@@ -46,4 +54,30 @@ def xor_decrypt(encrypted_base64, key):
     requested_key = (binary_key * (len(encrypted_binary) // len(binary_key) + 1))[:len(encrypted_binary)]
     decrypted_binary = ''.join('1' if encrypted_binary[i] != requested_key[i] else '0' for i in range(len(encrypted_binary)))
     return binary_to_text(decrypted_binary)
+
+
+def import_rsa_public_key(file_path, save_dir = "rsa_keys"):
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+
+    filename = os.path.basename(file_path)
+    save_path = os.path.join(save_dir, filename)
+
+    with open(file_path,'rb') as f:
+        public_key_data = f.read()
+
+
+    #for key validation
+
+    try:
+        serialization.load_pem_public_key(public_key_data, backend=default_backend())
+    except Exception as e:
+        raise ValueError(f"Invalid public key file: {e}") from e
+    
+    with open(save_path, 'wb') as f:
+        f.write(public_key_data)
+
+    return save_path
+
+
 
