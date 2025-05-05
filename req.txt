@@ -34,6 +34,9 @@ secure_encryptor/
 │   └── public.pem
 └── README.md
 
+#to work on 
+making the key basic influ on the encpt more regardless of there 2bit input
+
 
 
 

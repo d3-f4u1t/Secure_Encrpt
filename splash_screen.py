@@ -145,7 +145,7 @@ class SplashScreen:
 
         self.discord_button = ctk.CTkButton(
             self.sidebar,
-            text ="Add me on Discord:)",
+            text ="My Discord",
             font = ctk.CTkFont(size = 16),
             width = 150,
             height = 35,

@@ -5,6 +5,8 @@ import os
 import shutil
 from cryptography.hazmat.primitives import serialization #for importing keys and basic moving
 from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives import hashes
 
 
 
@@ -57,14 +59,15 @@ def xor_decrypt(encrypted_base64, key):
 
 
 def import_rsa_public_key(file_path, save_dir = "rsa_keys"):
-    if not os.path.exists(save_dir):
+
+    if not os.path.exists(save_dir): #cheks and makes sure file exists if note it'll create it
         os.makedirs(save_dir)
 
     filename = os.path.basename(file_path)
     save_path = os.path.join(save_dir, filename)
 
-    with open(file_path,'rb') as f:
-        public_key_data = f.read()
+    with open(file_path,'rb') as f: #will read the key in binary format 'rb'
+        public_key_data = f.read() #stored in this 
 
 
     #for key validation
@@ -78,6 +81,34 @@ def import_rsa_public_key(file_path, save_dir = "rsa_keys"):
         f.write(public_key_data)
 
     return save_path
+
+
+
+
+
+def encrypt_xor_key_rsa(xor_key: bytes, public_key_path: str) -> bytes:
+    #"""Encrypt the XOR key using RSA public key
+    #returns the encrypted key as bytes
+
+    #load public key again
+    with open(public_key_path, 'rb') as f:
+        public_key_path = f.read()
+
+    try:
+        public_key = serialization.load_pem_public_key(public_key_path, backend=default_backend())
+    except Exception as e:
+        raise ValueError(f"Invalid public key file: {e}") from e
+    
+    encrypted_key = public_key.encrypt(
+        xor_key,
+        padding.OAEP(
+            mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            algorithm=hashes.SHA256(),
+            label=None
+        )
+    )
+
+    return encrypted_key
 
 
 

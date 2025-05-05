@@ -2,6 +2,12 @@ import customtkinter as ctk
 from encryption import xor_encrypt, xor_decrypt, generate_random_key, binary_to_text
 from tkinter import messagebox, filedialog
 from encryption import import_rsa_public_key #same as there
+from encryption import encrypt_xor_key_rsa
+import base64
+import os
+
+
+
 
 
 
@@ -11,6 +17,8 @@ class EncryptionApp:
         self.root = root
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("green")
+        self.import_true = False
+        self.encrypt_xor_button = None
 
         root.title("Secure Encryptor")
         root.geometry("800x600")
@@ -29,7 +37,7 @@ class EncryptionApp:
         self.message_entry = ctk.CTkEntry(self.frame,placeholder_text= "Enter message", width = 600)
         self.message_entry.pack(pady=10)
         #key input
-        self.key_entry = ctk.CTkEntry(self.frame,placeholder_text = "Enter key(optional)", width = 600)
+        self.key_entry = ctk.CTkEntry(self.frame,placeholder_text = "Enter key(safe)", width = 600)
         self.key_entry.pack(pady=10)
 
         #buttons for encrypt
@@ -56,9 +64,15 @@ class EncryptionApp:
         )
         self.import_key_button.pack(pady=10)
 
+        
+
+        
+
         #output box
         self.output_box = ctk.CTkTextbox(self.frame, width = 600, height = 200)
         self.output_box.pack(pady=10)
+
+    
 
     def encrypt_message(self):
         message = self.message_entry.get()
@@ -88,13 +102,51 @@ class EncryptionApp:
         )
         if file_path:
             try:
+
+                # Extract and store just the filename (not full path)
+                self.public_key_filename = os.path.basename(file_path)
                 import_rsa_public_key(file_path)
                 messagebox.showinfo("Success", "Public key imported successfully.")
+                self.import_true = True
+
+                if self.encrypt_xor_button is None:
+                    self.encrypt_xor_button = ctk.CTkButton(
+                        self.frame,
+                        text = "Encrypt XOR Key with RSA",
+                        command = self.encrypt_xor_key_rsa
+                    )
+                    self.encrypt_xor_button.pack(pady=10)
+
             except Exception as e:
                 messagebox.showerror("Error", f"Failed to import public key:\n {e}")
+                self.import_true = False
+
+    def encrypt_xor_key_rsa(self):
+          # Optional: re-import here if needed
+
+        key = self.key_entry.get()
+        xor_key_bytes = key.encode()
+        pub_key_path = os.path.join("rsa_keys", self.public_key_filename)
+
+        if not key:
+            messagebox.showerror("Error", "Please enter a XOR key to encrypt.")
+            return
+
+            xor_key_bytes = key.encode()
+            pub_key_path = "rsa_keys/public_key.pem"  # Adjust if your key has a different name or path
+
+        try:
+            encrypted_key = encrypt_xor_key_rsa(xor_key_bytes, pub_key_path)
+            encoded_key = base64.b64encode(encrypted_key).decode()
+            self.output_box.delete("0.0", "end")
+            self.output_box.insert("0.0", f"Encrypted XOR Key with RSA:\n{encoded_key}")
+        except Exception as e:
+            messagebox.showerror("Error", f"RSA encryption failed:\n{e}")
 
 
+    
 
+        
 
 
         
