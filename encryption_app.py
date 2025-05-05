@@ -72,6 +72,22 @@ class EncryptionApp:
         self.output_box = ctk.CTkTextbox(self.frame, width = 600, height = 200)
         self.output_box.pack(pady=10)
 
+    # Check for any .pem file in rsa_keys folder
+        pem_files = [f for f in os.listdir("rsa_keys") if f.endswith(".pem")]
+        if pem_files:
+            self.public_key_filename = pem_files[0]  # use the first .pem file found
+            self.import_true = True
+            self.create_encrypt_xor_button()
+
+    def create_encrypt_xor_button(self):
+        if self.encrypt_xor_button is None:
+            self.encrypt_xor_button = ctk.CTkButton(
+                self.frame,
+                text="Encrypt XOR Key with RSA",
+                command=self.encrypt_xor_key_rsa
+            )
+            self.encrypt_xor_button.pack(pady=10)
+
     
 
     def encrypt_message(self):
