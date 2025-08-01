@@ -1,9 +1,9 @@
-#this is for encrption/decryption logic
+ #this is for encrption/decryption logic
 import random
 import base64
 import os
 import shutil
-from cryptography.hazmat.primitives import serialization #for importing keys and basic moving
+from cryptography.hazmat.primitives import serialization #for importing keys and basic moving of keys(rsa,Xor)
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives import hashes

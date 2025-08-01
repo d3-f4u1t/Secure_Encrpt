@@ -5,6 +5,8 @@ from encryption import import_rsa_public_key #same as there
 from encryption import encrypt_xor_key_rsa
 import base64
 import os
+from ss_encpt import ss_KeyGen
+import tkinter as tk
 
 
 
@@ -64,6 +66,23 @@ class EncryptionApp:
         )
         self.import_key_button.pack(pady=10)
 
+        self.keygen_window_button = ctk.CTkButton(
+            self.frame,
+            text = "Generate RSA Keys",
+            command = self.open_keygen_window
+
+        )
+
+        self.keygen_window_button.pack(pady=10)
+
+        
+    def open_keygen_window(self):
+        keygen_window = tk.Toplevel(self.root)
+        keygen_window.title("RSA KEY GENERATOR")
+        keygen_window.geometry("800x600")
+        ss_KeyGen(keygen_window)
+
+
         
 
         
@@ -78,7 +97,7 @@ class EncryptionApp:
             self.public_key_filename = pem_files[0]  # use the first .pem file found
             self.import_true = True
             self.create_encrypt_xor_button()
-
+#same as the other part below but this one is for already existing keys
     def create_encrypt_xor_button(self):
         if self.encrypt_xor_button is None:
             self.encrypt_xor_button = ctk.CTkButton(
@@ -158,6 +177,8 @@ class EncryptionApp:
             self.output_box.insert("0.0", f"Encrypted XOR Key with RSA:\n{encoded_key}")
         except Exception as e:
             messagebox.showerror("Error", f"RSA encryption failed:\n{e}")
+
+
 
 
     
