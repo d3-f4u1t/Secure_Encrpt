@@ -23,7 +23,7 @@ A simple encryption application that combines XOR encryption for message encodin
 ## Encryption Example:
 ![Encrypt](assets/subsec1.png)
 ![Decrypt](assets/subsec2.png)
-![Decrypt](assets/subsec2.png)
+![Decrypt](assets/subsec3.png)
 
 ## Installation:
 1. Clone the repository:
