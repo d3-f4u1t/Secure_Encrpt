@@ -39,7 +39,7 @@ class EncryptionApp:
         self.message_entry = ctk.CTkEntry(self.frame,placeholder_text= "Enter message", width = 600)
         self.message_entry.pack(pady=10)
         #key input
-        self.key_entry = ctk.CTkEntry(self.frame,placeholder_text = "Enter key(safe)", width = 600)
+        self.key_entry = ctk.CTkEntry(self.frame,placeholder_text = "Enter key(it's recommended to keep the length of the key same as the phrase and the letters u unique)", width = 600)
         self.key_entry.pack(pady=10)
 
         #buttons for encrypt
@@ -75,6 +75,9 @@ class EncryptionApp:
 
         self.keygen_window_button.pack(pady=10)
 
+        self.output_box = ctk.CTkTextbox(self.frame, width = 600, height = 200)
+        self.output_box.pack(pady=10)
+
         
     def open_keygen_window(self):
         keygen_window = tk.Toplevel(self.root)
@@ -88,8 +91,7 @@ class EncryptionApp:
         
 
         #output box
-        self.output_box = ctk.CTkTextbox(self.frame, width = 600, height = 200)
-        self.output_box.pack(pady=10)
+        
 
     # Check for any .pem file in rsa_keys folder
         pem_files = [f for f in os.listdir("rsa_keys") if f.endswith(".pem")]
@@ -181,7 +183,6 @@ class EncryptionApp:
 
 
 
-    
 
         
 
