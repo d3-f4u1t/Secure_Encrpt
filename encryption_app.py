@@ -39,8 +39,10 @@ class EncryptionApp:
         self.message_entry = ctk.CTkEntry(self.frame,placeholder_text= "Enter message", width = 600)
         self.message_entry.pack(pady=10)
         #key input
-        self.key_entry = ctk.CTkEntry(self.frame,placeholder_text = "Enter key(it's recommended to keep the length of the key same as the phrase and the letters u unique)", width = 600)
+        self.key_efromntry = ctk.CTkEntry(self.frame,placeholder_text = "Enter key(it's recommended to keep the length of the key same as the phrase and the letters u unique)", width = 600)
+        self.key_entry = ctk.CTkEntry(self.frame, placeholder_text="Enter XOR Key", width=600)
         self.key_entry.pack(pady=10)
+        
 
         #buttons for encrypt
 
@@ -153,6 +155,7 @@ class EncryptionApp:
                         command = self.encrypt_xor_key_rsa
                     )
                     self.encrypt_xor_button.pack(pady=10)
+                self.auto_encrypt_xor_key()
 
             except Exception as e:
                 messagebox.showerror("Error", f"Failed to import public key:\n {e}")
@@ -179,6 +182,26 @@ class EncryptionApp:
             self.output_box.insert("0.0", f"Encrypted XOR Key with RSA:\n{encoded_key}")
         except Exception as e:
             messagebox.showerror("Error", f"RSA encryption failed:\n{e}")
+
+    def auto_encrypt_xor_key(self):
+        key = self.key_entry.get()
+
+        if not key:
+            messagebox.showinfo("Missing XOR key, please emter a xor key first to encrypt.")
+            return
+        
+        try:
+            xor_key_bytes = key.encode()
+            pub_key_path = os.path.join("rsa_keys", self.public_key_filename)
+
+            encrypted_key = encrypt_xor_key_rsa(xor_key_bytes, pub_key_path)
+            encoded_key = base64.b6encode(encrypted_key).decode()
+            self.output_box.delete("0.0", "end")
+            self.output_box.insert("0.0", f"Encrypted XOR Key with RSA:\n{encoded_key}")  
+        except Exception as e:
+            messagebox.showerror("Error", f"RSA encryption failed:\n{e}")
+            
+
 
 
 

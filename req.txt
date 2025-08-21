@@ -10,7 +10,7 @@ basic idea for encpt and dcrpt
 user will enter a measg
 then app will create a random xor key
 that key will be used to then further encpt the measg
-then that  Xor KEY IS ENCPT USING RSA PUBLIC KEY AND that key will come from the one getting the measg
+then that  Xor KEY IS ENCPTed USING RSA PUBLIC KEY AND that key will come from the one getting the measg
 
 FOR NOW LETS CALL THE SENDER A
 AND THE ONE GETING THE MEASG B
@@ -36,6 +36,9 @@ secure_encryptor/
 
 #to work on 
 making the key basic influ on the encpt more regardless of there 2bit input
+
+fix the problem with double digit input
+
 
 
 

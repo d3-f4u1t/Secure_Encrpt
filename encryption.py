@@ -7,7 +7,9 @@ from cryptography.hazmat.primitives import serialization #for importing keys and
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives import hashes
-
+#extra imports just for rsa
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP
 
 
 print("its working here")
