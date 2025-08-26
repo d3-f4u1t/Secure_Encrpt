@@ -109,6 +109,18 @@ def encrypt_xor_key_rsa(xor_key: bytes, public_key_path: str) -> bytes:
             label=None
         )
     )
+    def decrypt_xor_key_rsa(encrypted_key_b64: bytes, private_key_path: str) -> str:
+        #decypt the rsa encrypted xor key usingthe privite key
+        with open(private_key_path, "rb") as f:
+            private_key = RSA.import_key(f.read())
+
+        cipher_rsa = PKCS1_OAEP.new(private_key)
+
+        encrypted_key = base64.b64decode(encrypted_key_b64)
+        decrypted_key = cipher_rsa.decrypt(encrypted_key)
+        return decrypted_key.decode()  # Convert bytes back to string
+
+
 
     return encrypted_key
 

@@ -80,6 +80,13 @@ class EncryptionApp:
         self.output_box = ctk.CTkTextbox(self.frame, width = 600, height = 200)
         self.output_box.pack(pady=10)
 
+        self.decrypt_xor_button = ctk.CTkButton(
+            self.frame,
+            text = "Decrypt XOR Key with RSA",
+            command = self.decrypt_xor_key_rsa
+        )
+        self.decrypt_xor_button.pack(pady = 10)
+
         
     def open_keygen_window(self):
         keygen_window = tk.Toplevel(self.root)
@@ -133,6 +140,8 @@ class EncryptionApp:
         decrypted = xor_decrypt(encrypted, key)
         self.output_box.delete("0.0", "end")
         self.output_box.insert("0.0", f"Decrypted:\n{decrypted}")
+
+
 
     def select_public_key_file(self):
         file_path = filedialog.askopenfilename(
@@ -195,11 +204,32 @@ class EncryptionApp:
             pub_key_path = os.path.join("rsa_keys", self.public_key_filename)
 
             encrypted_key = encrypt_xor_key_rsa(xor_key_bytes, pub_key_path)
-            encoded_key = base64.b6encode(encrypted_key).decode()
+            encoded_key = base64.b64encode(encrypted_key).decode()
             self.output_box.delete("0.0", "end")
             self.output_box.insert("0.0", f"Encrypted XOR Key with RSA:\n{encoded_key}")  
         except Exception as e:
             messagebox.showerror("Error", f"RSA encryption failed:\n{e}")
+
+    def decrypt_xor_key_rsa(self):
+        encrypted_key_b64 = self.message_entry.get()
+        priv_key_path = filedialog.askopenfilename(
+            title = "Select Private Key File",
+            filetypes = [("PEN files",".pem")]
+
+        )
+
+        if not priv_key_path:
+            return
+        
+        try:
+            from encryption import decrypt_xor_key
+            xor_key = decrypt_xor_key(encrypted_key_b64, priv_key_path)
+
+            self.output_box.delete("0.0", "end")
+            self.output_box.insert("0.0", f"Decrypted XOR Key:\n{xor_key}")
+
+        except Exception as e:
+            messagebox.showerror("Error", f"RSA decryption failed:\n{e}")
             
 
 
