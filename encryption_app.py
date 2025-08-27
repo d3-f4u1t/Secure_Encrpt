@@ -7,6 +7,7 @@ import base64
 import os
 from ss_encpt import ss_KeyGen
 import tkinter as tk
+from db import save_encryption
 
 
 
@@ -205,6 +206,15 @@ class EncryptionApp:
 
             encrypted_key = encrypt_xor_key_rsa(xor_key_bytes, pub_key_path)
             encoded_key = base64.b64encode(encrypted_key).decode()
+
+
+
+
+            #here is where the keys and data is being stored in the database
+            save_encryption(self.message_entry.get(), self.key_entry.get(), encoded_key)
+            self.output_box.insert("0.0", f"...\n(Saved to database ✓)")
+            #show the confermation  textbox
+
             self.output_box.delete("0.0", "end")
             self.output_box.insert("0.0", f"Encrypted XOR Key with RSA:\n{encoded_key}")  
         except Exception as e:
