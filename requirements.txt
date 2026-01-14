@@ -1,4 +1,5 @@
 pycryptodome
 customtkinter
 cryptography
-
+python-dotenv
+mysql-connector-python

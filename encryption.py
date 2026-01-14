@@ -13,7 +13,6 @@ from Crypto.Cipher import PKCS1_OAEP
 
 
 
-print("its working here")
 
 def text_to_binary(text):
     """Convert text to binary string."""
