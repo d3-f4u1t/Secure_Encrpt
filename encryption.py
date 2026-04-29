@@ -1,8 +1,9 @@
- #this is for encrption/decryption logic
+#this is for encrption/decryption logic
 import random
 import base64
 import os
 import shutil
+import hashlib
 from cryptography.hazmat.primitives import serialization #for importing keys and basic moving of keys(rsa,Xor)
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import padding
@@ -11,7 +12,18 @@ from cryptography.hazmat.primitives import hashes
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 
+def gen_keystream(key, length):
+    """Expand the user key into a deterministic byte stream of the requested length."""
+    key_bytes = key.encode("utf-8")
+    stream = b""
+    counter = 0
 
+    while len(stream) < length:
+        counter_bytes = counter.to_bytes(8, byteorder="big")
+        stream += hashlib.sha256(key_bytes + counter_bytes).digest()
+        counter += 1
+
+    return stream[:length]
 
 
 def text_to_binary(text):
@@ -40,24 +52,22 @@ def generate_random_key(length=16):
 
 
 def xor_encrypt(plain_text,key):
-    """Encrypt the plain text using XOR with the key."""
-    binary_text = text_to_binary(plain_text)
-    binary_key = text_to_binary(key)
-    # Repeat the key to match the length of the plain text
-    requested_key = (binary_key * (len(binary_text) // len(binary_key) + 1))[:len(binary_text)]
-
-    # XOR operation
-    encrypted_binary = ''.join('1' if binary_text[i] != requested_key[i] else '0' for i in range(len(binary_text)))                 
-
-    return binary_to_base64(encrypted_binary)
+    """Encrypt text by XORing utf-8 bytes with a keystream derived from the full key."""
+    plain_bytes = plain_text.encode("utf-8")
+    keystream = gen_keystream(key, len(plain_bytes))
+    encrypted_bytes = bytes(
+        plain_bytes[i] ^ keystream[i] for i in range(len(plain_bytes))
+    )
+    return base64.b64encode(encrypted_bytes).decode("utf-8")
 
     
 def xor_decrypt(encrypted_base64, key):
-    encrypted_binary = base64_to_binary(encrypted_base64)  # Convert Base64 back to binary
-    binary_key = text_to_binary(key)
-    requested_key = (binary_key * (len(encrypted_binary) // len(binary_key) + 1))[:len(encrypted_binary)]
-    decrypted_binary = ''.join('1' if encrypted_binary[i] != requested_key[i] else '0' for i in range(len(encrypted_binary)))
-    return binary_to_text(decrypted_binary)
+    encrypted_bytes = base64.b64decode(encrypted_base64.encode("utf-8"))
+    keystream = gen_keystream(key, len(encrypted_bytes))
+    decrypted_bytes = bytes(
+        encrypted_bytes[i] ^ keystream[i] for i in range(len(encrypted_bytes))
+    )
+    return decrypted_bytes.decode("utf-8")
 
 
 def import_rsa_public_key(file_path, save_dir = "rsa_keys"):

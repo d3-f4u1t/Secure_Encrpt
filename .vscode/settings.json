@@ -1,0 +1,6 @@
+{
+    "animations.CursorAnimation": true,
+    "animations.UseCursorColorForCursorAnimation": true,
+    "editor.cursorBlinking": "smooth",
+    "editor.cursorStyle": "block"
+}

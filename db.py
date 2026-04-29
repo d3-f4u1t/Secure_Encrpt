@@ -1,3 +1,4 @@
+from venv import create
 import mysql.connector
 from dotenv import load_dotenv
 import os
@@ -24,7 +25,7 @@ def get_db_connection():
         database = DB_NAME
     )
 
-#create database if not alaready exists
+# create database if not already exists
 
 def create_database():
     conn = get_server_connection()
@@ -32,7 +33,7 @@ def create_database():
     cursor.execute(f"CREATE DATABASE IF NOT EXISTS {DB_NAME}")
     conn.close()
 
-
+ 
 # to create table if not already exists
 
 def create_table():
@@ -64,6 +65,8 @@ def save_encryption(message, xor_key, rsa_encrypted_key):
 
 
     )
+
+
     conn.commit()
     cursor.close()
     conn.close()
