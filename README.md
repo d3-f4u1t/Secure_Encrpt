@@ -16,6 +16,7 @@ A simple encryption application that combines XOR encryption for message encodin
 ## Working on-->
 1. RSA implementation
 2. SQL database implementation
+3. better error handling
 
 ## Home Screen:
 ![Home](assets/mainSS.png)
