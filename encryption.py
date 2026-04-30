@@ -67,7 +67,7 @@ def xor_decrypt(encrypted_base64, key):
     decrypted_bytes = bytes(
         encrypted_bytes[i] ^ keystream[i] for i in range(len(encrypted_bytes))
     )
-    return decrypted_bytes.decode("utf-8")
+    return decrypted_bytes.decode("latin-1")
 
 
 def import_rsa_public_key(file_path, save_dir = "rsa_keys"):
