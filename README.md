@@ -1,37 +1,36 @@
-# Secure Encryptor
+<h1 align="center" id="title">Secure_Encrpt</h1>
 
-A simple encryption application that combines XOR encryption for message encoding and RSA encryption for key exchange.
+<p align="center"><img src="https://socialify.git.ci/d3-f4u1t/Secure_Encrpt/image?font=Jost&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Transparent&amp;stargazers=1&amp;theme=Dark" alt="project-image"></p>
 
-## Features:
-- Symmetric XOR encryption for the message.
-- RSA key exchange to securely share the XOR key between users.(working on THIS)
-- Graphical User Interface (GUI) built with Tkinter.
+<p id="description">A simple yet powerful desktop app for securely encrypting and decrypting messages using XOR encryption with RSA key exchange. Built with Python and a sleek customtkinter GUI</p>
 
-## How to Use:
-1. Enter the message you want to encrypt.
-2. Choose a key for XOR encryption or use a randomly generated one.
-3. The encrypted message and key will be displayed.
-4. To decrypt, input the encrypted message and key, and the application will decrypt it.
+<h2>Project Screenshots:</h2>
 
-## Working on-->
-1. RSA implementation
-2. SQL database implementation
-3. better error handling
+<img src="assets/subsec1.png" alt="project-screenshot" width="400" height="400/">
 
-## Home Screen:
-![Home](assets/mainSS.png)
+<img src="assets/subsec2.png" alt="project-screenshot" width="400" height="400/">
 
-## Encryption Example:
-![Encrypt](assets/subsec1.png)
-![Decrypt](assets/subsec2.png)
+  
+  
+<h2>🧐 Features</h2>
 
-## Installation:
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/secure_encryptor.git
+Here're some of the project's best features:
 
-## Run this command to install dependencies:
-1. Run this:
-   ```bash
-   pip install -r requirements.txt
+*   encryption
+*   RSA
+*   XOR
+*   BIT WISE OPERATIONS
 
+<h2>🛠️ Installation Steps:</h2>
+
+<p>1. git clone</p>
+
+```
+https://github.com/yourusername/secure_encryptor.git
+```
+
+<p>2. Run this command to install dependencies:</p>
+
+```
+pip install -r requirements.txt
+```
