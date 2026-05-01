@@ -12,7 +12,7 @@
 
   
   
-<h2>🧐 Features</h2>
+<h2> Features</h2>
 
 Here're some of the project's best features:
 
@@ -21,7 +21,7 @@ Here're some of the project's best features:
 *   XOR
 *   BIT WISE OPERATIONS
 
-<h2>🛠️ Installation Steps:</h2>
+<h2> Installation Steps:</h2>
 
 <p>1. git clone</p>
 
