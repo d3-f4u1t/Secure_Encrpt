@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://socialify.git.ci/d3-f4u1t/Secure_Encrpt/image?font=Jost&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Transparent&amp;stargazers=1&amp;theme=Dark" alt="project-image"></p>
 
-<p id="description">A simple yet powerful desktop app for securely encrypting and decrypting messages using XOR encryption with RSA key exchange. Built with Python and a sleek customtkinter GUI</p>
+<p id="description">Aapp for securely encrypting and decrypting messages using XOR encryption with RSA key exchange.</p>
 
 <h2>Project Screenshots:</h2>
 
