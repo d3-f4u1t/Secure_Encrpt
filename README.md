@@ -6,7 +6,7 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="assets/subsec1.png" alt="project-screenshot" width="1000" height="1000/">
+<img src="assets/subsec1.png" alt="project-screenshot">
 
 <img src="assets/subsec2.png" alt="project-screenshot" width="1000" height="1000/">
 
