@@ -26,7 +26,7 @@ Here're some of the project's best features:
 <p>1. git clone</p>
 
 ```
-https://github.com/yourusername/secure_encryptor.git
+https://github.com/d3-f4u1t/Secure_Encrpt.git
 ```
 
 <p>2. Run this command to install dependencies:</p>
